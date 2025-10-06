@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Little Red Riding Hood — Picture‑Book</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#fff;--fg:#111;--muted:#6b7280;--card:#fff;--shadow:0 10px 30px rgba(0,0,0,.08)}
+    html.dark{--bg:#0b0f19;--fg:#f3f4f6;--muted:#9ca3af;--card:#0e1524;--shadow:0 10px 30px rgba(0,0,0,.4)}
+    body{margin:0;background:var(--bg);color:var(--fg);font-family:'Source Sans 3',system-ui,sans-serif}
+    .wrap{max-width:960px;margin:0 auto;padding:24px}
+    header.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+    h1.title{font-family:'Quicksand',system-ui,sans-serif;font-weight:800;letter-spacing:.2px;margin:0;font-size:clamp(22px,2.4vw,32px)}
+    .controls{display:flex;gap:8px;flex-wrap:wrap}
+    button{appearance:none;border:1px solid rgba(0,0,0,.1);background:var(--card);color:var(--fg);padding:10px 14px;border-radius:12px;box-shadow:var(--shadow);cursor:pointer}
+    button[disabled]{opacity:.5;cursor:not-allowed}
+    .card{background:var(--card);padding:28px;border-radius:18px;box-shadow:var(--shadow)}
+    h2.page{font-family:'Quicksand',system-ui,sans-serif;margin:0 0 8px 0;font-size:clamp(20px,2.2vw,28px)}
+    p{text-wrap:pretty;line-height:1.8;font-size:clamp(17px,2vw,20px);margin:.5rem 0;white-space:pre-line}
+    .imgwrap{margin:8px 0 14px 0;text-align:center}
+    .imgwrap img{max-width:100%;height:auto;border-radius:14px;box-shadow:var(--shadow)}
+    nav.pager{margin-top:16px;display:flex;align-items:center;justify-content:space-between}
+    .muted{color:var(--muted);font-size:14px}
+    footer{margin-top:24px}
+    @media print{header.top, nav.pager, .print-hint {display:none !important} .wrap{max-width:700px} .card{box-shadow:none;break-inside:avoid-page;margin:0 0 24px 0}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <h1 class="title">📖 Little Red Riding Hood</h1>
+      <div class="controls">
+        <button id="themeBtn">Toggle theme</button>
+        <button id="speakBtn">Read aloud</button>
+        <button id="stopBtn">Stop</button>
+        <button id="printBtn">Print</button>
+      </div>
+    </header>
+
+    <div class="card" id="pageCard">
+      <div id="pageContent"></div>
+    </div>
+
+    <nav class="pager">
+      <button id="prevBtn">◀ Back</button>
+      <div class="muted" id="pageInfo"></div>
+      <button id="nextBtn">Next ▶</button>
+    </nav>
+
+    <footer class="print-hint muted">
+      Tip: Use ← → keys to flip pages. Click Print to export a PDF.
+    </footer>
+  </div>
+
+<script>
+  const PAGES = [{"index": 1, "text": "There was a little girl in a small village. Everyone loved her, especially her mom and grandma. Grandma sewed her a cozy red hood, and from then on people called her Little Red Riding Hood.", "images": ["Images/page-01-img-01.jpeg"]}, {"index": 2, "text": "One morning, Mom said, \u201cGrandma isn\u2019t feeling well. Please take her this cake and a little pot of butter.\u201d", "images": ["Images/page-02-img-01.jpeg"]}, {"index": 3, "text": "Little Red put on her red hood, picked up the basket, and started for Grandma\u2019s house in the next village.", "images": ["Images/page-03-img-01.jpeg"]}, {"index": 4, "text": "Along the forest path she met a wolf. He looked friendly, but he wasn\u2019t. \u201cWhere are you going?\u201d he asked. Little Red didn\u2019t know it was risky to talk to strangers, so she answered politely.", "images": ["Images/page-04-img-01.jpeg"]}, {"index": 5, "text": "\u201cDoes she live far?\u201d asked the wolf. \u201cPast the old mill\u2014the first house in the village,\u201d said Little Red. \u201cLet\u2019s see who gets there first,\u201d said the wolf, and he hurried away.", "images": ["Images/page-05-img-01.jpeg"]}, {"index": 6, "text": "The wolf ran down the short, straight path. Little Red walked the longer, winding way, listening to birds and picking flowers.", "images": ["Images/page-06-img-01.jpeg"]}, {"index": 7, "text": "The wolf reached Grandma\u2019s cottage first. He knocked. \u201cTap, tap.\u201d \u201cWho\u2019s there?\u201d asked Grandma. \u201cIt\u2019s me\u2014Little Red Riding Hood,\u201d the wolf said, pretending to be the girl.", "images": ["Images/page-07-img-01.jpeg"]}, {"index": 8, "text": "\u201cPull the string and the latch will open,\u201d said Grandma. The wolf rushed in and, because he was very hungry, he gobbled Grandma up. Then he put on her nightcap and glasses and climbed into bed.", "images": ["Images/page-08-img-01.jpeg"]}, {"index": 9, "text": "Soon Little Red arrived and knocked. \u201cTap, tap.\u201d \u201cWho\u2019s there?\u201d growled the wolf in a low voice. Little Red felt a bit scared.", "images": ["Images/page-09-img-01.jpeg"]}, {"index": 10, "text": "She thought, \u201cGrandma must have a bad cold.\u201d \u201cIt\u2019s me\u2014Little Red Riding Hood. I brought you cake and butter,\u201d she said. \u201cPull the string and come in,\u201d the wolf replied.", "images": ["Images/page-10-img-01.jpeg"]}, {"index": 11, "text": "Little Red stepped closer to the bed and looked carefully. \u201cGrandmother, what big arms you have!\u201d \u201cAll the better to hug you with,\u201d said the wolf. \u201cWhat big ears you have!\u201d \u201cAll the better to hear you with.\u201d \u201cWhat big eyes you have!\u201d \u201cAll the better to see you with.\u201d", "images": ["Images/page-11-img-01.jpeg"]}, {"index": 12, "text": "\u201cGrandmother, what big teeth you have!\u201d \u201cAll the better to eat you with!\u201d With a jump, the wolf swallowed Little Red in one gulp!", "images": ["Images/page-12-img-01.jpeg"]}, {"index": 13, "text": "Just then some woodcutters heard the noise. They rushed in and shouted at the wolf.", "images": ["Images/page-13-img-01.jpeg"]}, {"index": 14, "text": "The startled wolf coughed and\u2014believe it or not\u2014out popped Grandma and Little Red! The wolf ran far away. Grandma hugged Little Red. \u201cPlease don\u2019t talk to strangers,\u201d she said. \u201cI won\u2019t,\u201d said Little Red. And she kept her promise.", "images": ["Images/page-14-img-01.jpeg"]}];
+
+  const pageContent = document.getElementById('pageContent');
+  const pageInfo = document.getElementById('pageInfo');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const themeBtn = document.getElementById('themeBtn');
+  const speakBtn = document.getElementById('speakBtn');
+  const stopBtn = document.getElementById('stopBtn');
+  const printBtn = document.getElementById('printBtn');
+
+  let index = 0;
+  function el(tag, cls){ const e = document.createElement(tag); if (cls) e.className = cls; return e; }
+
+  function render(){
+    const p = PAGES[index];
+    pageContent.innerHTML = "";
+    const h2 = el('h2','page'); h2.textContent = 'Page ' + p.index; pageContent.appendChild(h2);
+
+    if (p.images && p.images.length){
+      p.images.forEach(src => {
+        const wrap = el('div','imgwrap');
+        const img = el('img');
+        img.src = src; img.alt = 'Illustration';
+        wrap.appendChild(img); pageContent.appendChild(wrap);
+      });
+    }
+    if (p.text){
+      const t = el('p'); t.textContent = p.text; pageContent.appendChild(t);
+    }
+
+    pageInfo.textContent = `Page ${index+1} of ${PAGES.length}`;
+    prevBtn.disabled = index === 0;
+    nextBtn.textContent = index < PAGES.length - 1 ? "Next ▶" : "Start Over ↻";
+  }
+
+  prevBtn.addEventListener('click', () => { index = Math.max(0, index-1); render(); });
+  nextBtn.addEventListener('click', () => { if (index < PAGES.length - 1) index++; else index = 0; render(); });
+  window.addEventListener('keydown', (e) => { if (e.key === 'ArrowLeft') prevBtn.click(); if (e.key === 'ArrowRight') nextBtn.click(); });
+
+  themeBtn.addEventListener('click', () => { document.documentElement.classList.toggle('dark'); });
+
+  printBtn.addEventListener('click', () => { window.print(); });
+
+  // Speech
+  let speaking = false; let pendingTimer = null;
+  function stopSpeech(){ if (!('speechSynthesis' in window)) return; window.speechSynthesis.cancel(); speaking = false; if (pendingTimer){ clearTimeout(pendingTimer); pendingTimer = null; } }
+  function speakText(text){
+    if (!('speechSynthesis' in window)) return;
+    stopSpeech();
+    const parts = text.replace(/\\n+/g, ' ').split(/(?<=[.!?])\\s+/).filter(Boolean);
+    let i = 0;
+    const sayNext = () => {
+      if (i >= parts.length){ speaking = false; return; }
+      const u = new SpeechSynthesisUtterance(parts[i]); u.rate = 0.96; u.pitch = 1.0; u.onend = () => { pendingTimer = setTimeout(sayNext, 180); };
+      speaking = true; window.speechSynthesis.speak(u); i++;
+    };
+    sayNext();
+  }
+  speakBtn.addEventListener('click', () => { const p = PAGES[index]; if (p.text) speakText(p.text); });
+  stopBtn.addEventListener('click', stopSpeech);
+
+  render();
+</script>
+</body>
+</html>
