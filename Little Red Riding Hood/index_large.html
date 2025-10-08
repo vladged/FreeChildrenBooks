@@ -26,34 +26,6 @@
     footer{margin-top:24px}
     @media print{header.top, nav.pager, .print-hint {display:none !important} .wrap{max-width:700px} .card{box-shadow:none;break-inside:avoid-page;margin:0 0 24px 0}}
   </style>
-
-<style>
-/* --- Compact overrides for better fit --- */
-.wrap { padding: 12px !important; }
-header.top { margin-bottom: 6px !important; }
-h1.title { font-size: clamp(18px, 2vw, 26px) !important; }
-.card { padding: 18px !important; }
-h2.page { font-size: clamp(18px, 2vw, 24px) !important; }
-p { font-size: clamp(16px, 1.8vw, 18px) !important; line-height: 1.7 !important; }
-button { padding: 8px 12px !important; }
-.imgwrap { margin: 4px 0 10px 0 !important; }
-.imgwrap img { max-height: calc(45vh + 96px) !important; object-fit: contain !important; }
-nav.pager { 
-  position: sticky !important; 
-  bottom: 0 !important; 
-  background: var(--bg) !important; 
-  padding-top: 6px !important; 
-  padding-bottom: 6px !important; 
-  border-top: 1px solid rgba(0,0,0,.06) !important;
-}
-/* On very short viewports, tighten even more */
-@media (max-height: 700px) {
-  .wrap { padding: 8px !important; }
-  .card { padding: 14px !important; }
-  .imgwrap img { max-height: calc(40vh + 96px) !important; }
-}
-</style>
-
 </head>
 <body>
   <div class="wrap">
