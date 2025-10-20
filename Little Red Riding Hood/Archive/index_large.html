@@ -2,6 +2,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Little Red Riding Hood — Picture‑Book</title>
+    <!-- SEO tags for searchability -->
+    <meta name="keywords" content="Free Children Books, Little Red Riding Hood, Picture Book, Kids Story, Fairy Tale">
+    <meta name="description"
+      content="Read Little Red Riding Hood online. Free Children Books. Illustrated picture book for kids.">
+    <!-- ...existing code... -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Little Red Riding Hood — Picture‑Book</title>
@@ -52,6 +60,8 @@
     <footer class="print-hint muted">
       Tip: Use ← → keys to flip pages. Click Print to export a PDF.
     </footer>
+    <!-- Visitor count display -->
+    <div class="muted" id="visitorCount"></div>
   </div>
 
 <script>
@@ -118,6 +128,22 @@
   stopBtn.addEventListener('click', stopSpeech);
 
   render();
+  
+  // ...existing code...
+
+      // Visitor count using countapi.xyz
+      function updateVisitorCount() {
+        fetch('https://api.countapi.xyz/hit/childrenbook/lrrh')
+          .then(res => res.json())
+          .then(data => {
+            document.getElementById('visitorCount').textContent =
+              `Visitors: ${data.value}`;
+          });
+  }
+      updateVisitorCount();
+
+    // ...existing code...
+  </script>
 </script>
 </body>
 </html>

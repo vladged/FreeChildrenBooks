@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Three Little Pigs — Picture‑Book</title>
+  <meta name="keywords" content="Free Children Books, The Three Little Pigs, Picture Book, Kids Story, Fairy Tale">
+  <meta name="description"
+    content="Read The Three Little Pigs online. Free Children Books. Illustrated picture book for kids.">
+  <!-- ...existing code... -->
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#fff;--fg:#111;--muted:#6b7280;--card:#fff;--shadow:0 10px 30px rgba(0,0,0,.08)}
+    html.dark{--bg:#0b0f19;--fg:#f3f4f6;--muted:#9ca3af;--card:#0e1524;--shadow:0 10px 30px rgba(0,0,0,.4)}
+    body{margin:0;background:var(--bg);color:var(--fg);font-family:'Source Sans 3',system-ui,sans-serif}
+    .wrap{max-width:960px;margin:0 auto;padding:24px}
+    header.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+    h1.title{font-family:'Quicksand',system-ui,sans-serif;font-weight:800;letter-spacing:.2px;margin:0;font-size:clamp(22px,2.4vw,32px)}
+    .controls{display:flex;gap:8px;flex-wrap:wrap}
+    button{appearance:none;border:1px solid rgba(0,0,0,.1);background:var(--card);color:var(--fg);padding:10px 14px;border-radius:12px;box-shadow:var(--shadow);cursor:pointer}
+    button[disabled]{opacity:.5;cursor:not-allowed}
+    .card{background:var(--card);padding:28px;border-radius:18px;box-shadow:var(--shadow)}
+    h2.page{font-family:'Quicksand',system-ui,sans-serif;margin:0 0 8px 0;font-size:clamp(20px,2.2vw,28px)}
+    p{text-wrap:pretty;line-height:1.8;font-size:clamp(17px,2vw,20px);margin:.5rem 0;white-space:pre-line}
+    .imgwrap{margin:8px 0 14px 0;text-align:center}
+    .imgwrap img{max-width:100%;height:auto;border-radius:14px;box-shadow:var(--shadow)}
+    nav.pager{margin-top:16px;display:flex;align-items:center;justify-content:space-between}
+    .muted{color:var(--muted);font-size:14px}
+    footer{margin-top:24px}
+    @media print{header.top, nav.pager, .print-hint {display:none !important} .wrap{max-width:700px} .card{box-shadow:none;break-inside:avoid-page;margin:0 0 24px 0}}
+  </style>
+
+<style>
+/* --- Compact overrides for better fit --- */
+.wrap { padding: 12px !important; }
+header.top { margin-bottom: 6px !important; }
+h1.title { font-size: clamp(18px, 2vw, 26px) !important; }
+.card { padding: 18px !important; }
+h2.page { font-size: clamp(18px, 2vw, 24px) !important; }
+p { font-size: clamp(16px, 1.8vw, 18px) !important; line-height: 1.7 !important; }
+button { padding: 8px 12px !important; }
+.imgwrap { margin: 4px 0 10px 0 !important; }
+.imgwrap img { max-height: 45vh !important; object-fit: contain !important; }
+nav.pager { 
+  position: sticky !important; 
+  bottom: 0 !important; 
+  background: var(--bg) !important; 
+  padding-top: 6px !important; 
+  padding-bottom: 6px !important; 
+  border-top: 1px solid rgba(0,0,0,.06) !important;
+}
+/* On very short viewports, tighten even more */
+@media (max-height: 700px) {
+  .wrap { padding: 8px !important; }
+  .card { padding: 14px !important; }
+  .imgwrap img { max-height: 40vh !important; }
+}
+</style>
+
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <h1 class="title">📖 The Three Little Pigs</h1>
+      <div class="controls">
+        <button id="themeBtn">Toggle theme</button>
+        <button id="speakBtn">Read aloud</button>
+        <button id="stopBtn">Stop</button>
+        <button id="printBtn">Print</button>
+      </div>
+    </header>
+
+    <div class="card" id="pageCard">
+      <div id="pageContent"></div>
+    </div>
+
+    <nav class="pager">
+      <button id="prevBtn">◀ Back</button>
+      <div class="muted" id="pageInfo"></div>
+      <button id="nextBtn">Next ▶</button>
+    </nav>
+
+    <footer class="print-hint muted">
+      Tip: Use ← → keys to flip pages. Click Print to export a PDF.
+    </footer>
+      <!-- Visitor count display -->
+      <div class="muted" id="visitorCount"></div>
+  </div>
+
+<script>
+  const PAGES = [
+  {
+    "index": 1,
+    "text": "Once upon a time, there were three little pigs who left their cozy home to build houses of their own. Their mother, a kind and caring pig, gave them each a hug and warned them to be careful out in the world. The pigs, each with their own personality — silly, relaxed, and clever — waved goodbye and set off down the sunny path.",
+    "images": [
+      "Images/page-01-img-01.png"
+    ]
+  },
+  {
+    "index": 2,
+    "text": "Each pig decided to build his own kind of house. The first pig, carefree and playful, made his home out of straw because it was fast and easy. The second pig, laid-back but a bit more practical, built his house out of sticks. But the third pig, the smartest of them all, wore his hard hat and glasses and took his time carefully building a sturdy brick house.",
+    "images": [
+      "Images/page-02-img-01.png"
+    ]
+  },
+  {
+    "index": 3,
+    "text": "While the first two pigs finished their houses quickly, they decided to relax and play. The silly pig danced around his straw house, proud of his quick work. The second pig leaned against his stick house, tossing a twig in the air. But the third pig kept building — brick by brick — carefully crafting a strong and sturdy home. He knew it would take longer, but he wanted to be safe.",
+    "images": [
+      "Images/page-03-img-01.png"
+    ]
+  },
+  {
+    "index": 4,
+    "text": "One day, the big bad wolf came sneaking down the path. He spotted the silly pig’s straw house and licked his lips. With a growl, he knocked on the door and shouted, “Little pig, little pig, let me come in!” The pig peeked out the window, frightened but firm. “Not by the hair of my chinny chin chin!” he squealed.",
+    "images": [
+      "Images/page-04-img-01.png"
+    ]
+  },
+  {
+    "index": 5,
+    "text": "“Then I’ll huff, and I’ll puff, and I’ll blow your house down!” shouted the wolf. He took a deep breath and blew with all his might. The straw flew into the air, and the whole house collapsed! The silly pig squealed and ran as fast as he could, heading straight for his brother’s stick house.",
+    "images": [
+      "Images/page-05-img-01.png"
+    ]
+  },
+  {
+    "index": 6,
+    "text": "The wolf chased the silly pig all the way to the stick house. The two pigs locked the door and peeked through the window. The wolf snarled and knocked. “Little pigs, little pigs, let me come in!” he growled. “Not by the hair of our chinny chin chins!” they shouted together.",
+    "images": [
+      "Images/page-06-img-01.png"
+    ]
+  },
+  {
+    "index": 7,
+    "text": "“Then I’ll huff, and I’ll puff, and I’ll blow your house down!” growled the wolf. With a mighty breath, he blew the stick house to pieces! The two frightened pigs didn’t look back — they raced through the woods toward their brother’s brick house. The smart pig opened the door and called out, “Hurry, get inside!”",
+    "images": [
+      "Images/page-07-img-01.png"
+    ]
+  },
+  {
+    "index": 8,
+    "text": "The wolf stormed up to the brick house and banged on the door. “Little pigs, little pigs, let me come in!” he roared. Inside, all three pigs huddled together. The smart pig stood firm. “Not by the hair of our chinny chin chins!” he replied.",
+    "images": [
+      "Images/page-08-img-01.png"
+    ]
+  },
+  {
+    "index": 9,
+    "text": "The wolf huffed, and he puffed, and he blew with all his might — but the brick house didn’t move an inch. Inside, the three pigs watched calmly. “Your house is too strong!” shouted the wolf, panting. “That’s what happens when you build it right,” the smart pig said proudly.",
+    "images": [
+      "Images/page-09-img-01.png"
+    ]
+  },
+  {
+    "index": 10,
+    "text": "The wolf couldn’t blow the brick house down, so he crept around the back and climbed up to the roof. “I’ll slide down the chimney and catch them by surprise!” he whispered. Inside the house, the three pigs huddled together, looking nervously up at the chimney.",
+    "images": [
+      "Images/page-10-img-01.png"
+    ]
+  },
+  {
+    "index": 11,
+    "text": "The smart pig had a plan. He lit a fire in the fireplace and placed a big pot of water over it. Just as the wolf slid down the chimney — SPLASH! — he landed right in the boiling pot! “YOWWW!” the wolf cried, shooting back up the chimney and vanishing into the woods, never to return.",
+    "images": [
+      "Images/page-11-img-01.png"
+    ]
+  },
+  {
+    "index": 12,
+    "text": "The three pigs were safe at last. They sat together inside the warm brick house, laughing and sharing a pie. “We’ll always stick together,” said the smart pig. “And next time, we all build with bricks!” From that day on, they lived happily ever after — safe, smart, and side by side.",
+    "images": [
+      "Images/page-12-img-01.png"
+    ]
+  }
+];
+</script>
+</body>
+</html>
