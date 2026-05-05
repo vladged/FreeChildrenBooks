@@ -1,0 +1,34 @@
+{
+  "title": "The Three Little Pigs",
+  "style_guide": "Warm, polished children's picture-book illustration with soft daylight, gentle watercolor-and-gouache texture, rounded expressive characters, cozy countryside backgrounds, consistent camera distance, and bright but natural colors. Keep the art playful and safe for young readers.",
+  "character_guide": "Three young pig brothers should remain consistent across pages: the silly first pig wears a straw hat and blue overalls; the relaxed second pig wears a plaid shirt or work shirt; the smart third pig wears a yellow construction hard hat, round black glasses, and neat work clothes. The wolf is gray, lean, expressive, and mischievous rather than frightening. Keep the brick house red-orange with a chimney and the same cozy cottage feel once established.",
+  "image_constraints": "Use one clean full-bleed illustration per page. Keep a 4:3-ish picture-book composition. Do not include title lettering, page numbers, speech bubbles, captions, watermarks, UI, or extra typography inside the image.",
+  "consistency_review": [
+    {
+      "severity": "fixed",
+      "page": 10,
+      "issue": "The active page 10 image had embedded title text and a page number, unlike every other illustration.",
+      "action": "Use the cleaner alternate page-10_1-img-01.png for page 10."
+    },
+    {
+      "severity": "watch",
+      "page": 1,
+      "issue": "The mother pig appears only on page 1, which is narratively fine, but her larger scale and apron make the opening image feel slightly different from the rest."
+    },
+    {
+      "severity": "watch",
+      "page": 8,
+      "issue": "The two running pigs are shown from behind and simplified, so their clothing identities are less clear than in adjacent pages."
+    },
+    {
+      "severity": "watch",
+      "page": 12,
+      "issue": "The final page includes a speech bubble. Future regenerated images should avoid in-image text and let the HTML carry all story text."
+    },
+    {
+      "severity": "good",
+      "page": "all",
+      "issue": "All current source images share the same 1800x1352 dimensions and broadly compatible warm storybook lighting."
+    }
+  ]
+}
