@@ -1,34 +1,26 @@
 {
   "title": "The Three Little Pigs",
-  "style_guide": "Warm, polished children's picture-book illustration with soft daylight, gentle watercolor-and-gouache texture, rounded expressive characters, cozy countryside backgrounds, consistent camera distance, and bright but natural colors. Keep the art playful and safe for young readers.",
-  "character_guide": "Three young pig brothers should remain consistent across pages: the silly first pig wears a straw hat and blue overalls; the relaxed second pig wears a plaid shirt or work shirt; the smart third pig wears a yellow construction hard hat, round black glasses, and neat work clothes. The wolf is gray, lean, expressive, and mischievous rather than frightening. Keep the brick house red-orange with a chimney and the same cozy cottage feel once established.",
-  "image_constraints": "Use one clean full-bleed illustration per page. Keep a 4:3-ish picture-book composition. Do not include title lettering, page numbers, speech bubbles, captions, watermarks, UI, or extra typography inside the image.",
+  "style_guide": "Warm, polished children's picture-book illustration with soft daylight, gentle watercolor-and-gouache texture, rounded expressive characters, cozy countryside backgrounds, consistent camera distance, and bright but natural colors. Keep the art playful and safe for young readers. Maintain the same character designs, wardrobe, house designs, and countryside setting across every page as if using one illustrated model sheet.",
+  "character_guide": "The three young pig brothers must remain visually consistent on every page, even when running, hiding, seen through windows, or shown small in the background. Never show any of the three pigs unclothed. First pig: silly and cheerful, pink skin, straw farmer hat, blue denim overalls over a simple light shirt, bare pig feet. Second pig: relaxed and practical, pink skin, red-and-blue plaid button-up shirt with a clear checkered plaid pattern, brown suspenders or simple brown trousers, no hat, bare pig feet. Third pig: clever and careful, pink skin, yellow construction hard hat, round black glasses, neat white work shirt, blue trousers or blue overalls, small tool belt when appropriate, bare pig feet. The mother pig appears only on page 1 in a simple blue-gray dress and apron. The wolf is always the same gray, lean, expressive, mischievous character with pointed ears, long snout, shaggy fur, and friendly-storybook menace rather than horror.",
+  "image_constraints": "Use one clean full-bleed illustration per page. Keep a 4:3-ish picture-book composition. Do not include any title lettering, page numbers, speech bubbles, captions, watermarks, UI, signs, labels, handwritten words, comic sound effects, or extra typography inside the image. No visible letters or words anywhere. Clothing must stay visible enough to identify each pig when a pig appears. Do not omit hats, glasses, overalls, plaid shirt, or hard hat unless that pig is fully out of frame.",
+  "setting_guide": "Keep the houses consistent across all pages. Straw house: small rounded golden straw hut with thick thatched roof and walls, simple rectangular wooden door, two small square windows with pale trim, loose straw texture, sunny meadow placement. Stick house: small dark-brown twig cabin made from bundled branches, triangular twig roof, crooked branch doorway, one small window, visibly fragile but recognizable as the same stick house each time. Brick house: sturdy red-orange brick cottage with cream mortar, dark gray roof, central wooden door, white-trimmed rectangular windows, short red-brick chimney, cozy cottage proportions, same scale and shape from outside; inside scenes should show matching red-orange brick walls, warm wooden beams, fireplace, chimney, and homely furnishings.",
   "consistency_review": [
     {
       "severity": "fixed",
-      "page": 10,
-      "issue": "The active page 10 image had embedded title text and a page number, unlike every other illustration.",
-      "action": "Use the cleaner alternate page-10_1-img-01.png for page 10."
+      "page": "all",
+      "issue": "The previous active images drifted between clothed and unclothed pigs, varied the second pig's outfit, and changed house designs between pages.",
+      "action": "Regenerated and accepted a full page 1-12 image set using stricter character, wardrobe, and house continuity guidance."
     },
     {
-      "severity": "watch",
-      "page": 1,
-      "issue": "The mother pig appears only on page 1, which is narratively fine, but her larger scale and apron make the opening image feel slightly different from the rest."
-    },
-    {
-      "severity": "watch",
-      "page": 8,
-      "issue": "The two running pigs are shown from behind and simplified, so their clothing identities are less clear than in adjacent pages."
-    },
-    {
-      "severity": "watch",
+      "severity": "fixed",
       "page": 12,
-      "issue": "The final page includes a speech bubble. Future regenerated images should avoid in-image text and let the HTML carry all story text."
+      "issue": "The previous final page included a speech bubble.",
+      "action": "Accepted a regenerated page 12 image with no in-image text."
     },
     {
       "severity": "good",
       "page": "all",
-      "issue": "All current source images share the same 1800x1352 dimensions and broadly compatible warm storybook lighting."
+      "issue": "The accepted images now keep the first pig in a straw hat and blue overalls, the second pig in a plaid shirt, the third pig in a yellow hard hat and glasses, and repeat the straw, stick, and brick house designs consistently."
     }
   ]
 }
