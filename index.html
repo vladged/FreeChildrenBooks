@@ -3,28 +3,393 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Free Children Books - Start</title>
+  <title>Free Children Books</title>
   <style>
-    body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; display:flex; align-items:center; justify-content:center; height:100vh; margin:0; background:#f9fafb; color:#111827 }
-    .card { background:white; padding:2rem; border-radius:12px; box-shadow:0 6px 20px rgba(2,6,23,0.08); max-width:480px; width:90%; text-align:center }
-    h1 { margin:0 0 1rem 0; font-size:1.25rem }
-    ul { list-style:none; padding:0; margin:1rem 0 0 0 }
-    a.link { display:block; padding:0.75rem 1rem; margin:0.5rem 0; border-radius:8px; background:#111827; color:white; text-decoration:none }
-    a.link:hover { background:#374151 }
-    .note { margin-top:1rem; font-size:0.9rem; color:#6b7280 }
+    :root {
+      color-scheme: light;
+      --ink: #172033;
+      --muted: #5f6b7a;
+      --paper: #fffaf1;
+      --surface: #ffffff;
+      --line: #e3dccf;
+      --primary: #245b7a;
+      --primary-dark: #183f56;
+      --accent: #b94f36;
+      --shadow: 0 18px 50px rgba(23, 32, 51, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(circle at 12% 18%, rgba(185, 79, 54, 0.12), transparent 30%),
+        radial-gradient(circle at 86% 8%, rgba(36, 91, 122, 0.16), transparent 28%),
+        linear-gradient(180deg, #fffaf1 0%, #f5efe2 100%);
+      color: var(--ink);
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid rgba(227, 220, 207, 0.9);
+      background: rgba(255, 250, 241, 0.94);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-wrap {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      min-height: 76px;
+    }
+
+    .brand {
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.35rem, 2.5vw, 2rem);
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .main-menu {
+      display: flex;
+      align-items: stretch;
+      justify-content: flex-end;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .menu-item {
+      position: relative;
+    }
+
+    .menu-trigger {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding: 0 16px;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      color: var(--ink);
+      font-weight: 700;
+      text-decoration: none;
+      cursor: default;
+    }
+
+    .menu-trigger::after {
+      content: "";
+      width: 8px;
+      height: 8px;
+      margin-left: 10px;
+      border-right: 2px solid currentColor;
+      border-bottom: 2px solid currentColor;
+      transform: translateY(-3px) rotate(45deg);
+    }
+
+    .menu-item:hover .menu-trigger,
+    .menu-item:focus-within .menu-trigger {
+      border-color: rgba(36, 91, 122, 0.18);
+      background: #ffffff;
+      color: var(--primary-dark);
+    }
+
+    .submenu {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      min-width: 260px;
+      margin: 0;
+      padding: 8px;
+      list-style: none;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-6px);
+      transition: opacity 150ms ease, transform 150ms ease, visibility 150ms ease;
+    }
+
+    .menu-item:hover .submenu,
+    .menu-item:focus-within .submenu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .submenu a {
+      display: block;
+      padding: 12px 14px;
+      border-radius: 7px;
+      color: var(--ink);
+      font-weight: 700;
+      text-decoration: none;
+      line-height: 1.25;
+    }
+
+    .submenu a:hover,
+    .submenu a:focus {
+      outline: none;
+      background: #edf5f8;
+      color: var(--primary-dark);
+    }
+
+    main {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 56px 0 40px;
+    }
+
+    .intro {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+      gap: 34px;
+      align-items: center;
+      min-height: calc(100vh - 172px);
+    }
+
+    .intro-copy {
+      padding: 10px 0;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 780px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.4rem, 7vw, 5.25rem);
+      line-height: 0.96;
+      letter-spacing: 0;
+    }
+
+    .intro-copy p {
+      max-width: 620px;
+      margin: 22px 0 0;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      line-height: 1.65;
+    }
+
+    .book-groups {
+      display: grid;
+      gap: 18px;
+    }
+
+    .book-group {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.82);
+      box-shadow: 0 14px 34px rgba(23, 32, 51, 0.08);
+      overflow: hidden;
+    }
+
+    .book-group h2 {
+      margin: 0;
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--line);
+      background: #fffdf8;
+      color: var(--primary-dark);
+      font-size: 1rem;
+      letter-spacing: 0;
+    }
+
+    .book-list {
+      display: grid;
+      gap: 1px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      background: var(--line);
+    }
+
+    .book-list a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      min-height: 58px;
+      padding: 0 20px;
+      background: var(--surface);
+      color: var(--ink);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .book-list a::after {
+      content: "Open";
+      flex: 0 0 auto;
+      padding: 7px 10px;
+      border-radius: 7px;
+      background: #f3ead9;
+      color: #6f4528;
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .book-list a:hover,
+    .book-list a:focus {
+      outline: none;
+      background: #edf5f8;
+      color: var(--primary-dark);
+    }
+
+    .visitor-card {
+      margin-top: 28px;
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.78);
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .visitor-card strong {
+      color: var(--ink);
+    }
+
+    @media (max-width: 820px) {
+      .site-header {
+        position: static;
+      }
+
+      .nav-wrap {
+        width: min(100% - 24px, 640px);
+        display: block;
+        padding: 18px 0;
+      }
+
+      .brand {
+        display: block;
+        margin-bottom: 14px;
+      }
+
+      .main-menu {
+        display: grid;
+        gap: 8px;
+      }
+
+      .menu-trigger {
+        width: 100%;
+        justify-content: space-between;
+        border-color: var(--line);
+        background: #ffffff;
+      }
+
+      .submenu {
+        position: static;
+        min-width: 0;
+        margin-top: 8px;
+        box-shadow: none;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+      }
+
+      main {
+        width: min(100% - 24px, 640px);
+        padding-top: 34px;
+      }
+
+      .intro {
+        display: block;
+        min-height: 0;
+      }
+
+      .book-groups {
+        margin-top: 28px;
+      }
+    }
   </style>
 </head>
 <body>
-  <main class="card">
-    <h1>Free Children Books</h1>
-    <p>Select a story to open:</p>
-    <ul>
-      <li><a class="link" href="Little Red Riding Hood/Little_Red_Riding_Hood.html">Little Red Riding Hood</a></li>
-      <li><a class="link" href="Three_Little_Pigs/three_little_pigs_final.html">Three Little Pigs</a></li>
-      <li><a class="link" href="The Ugly Duckling/Ugly_Duck.html">The Ugly Duckling</a></li>
-    </ul>
-    <p class="note">If your hosting treats paths as case-sensitive, ensure the folder names match exactly.</p>
-  </main>
-</body>
+  <header class="site-header">
+    <nav class="nav-wrap" aria-label="Main menu">
+      <a class="brand" href="index.html">Free Children Books</a>
+      <ul class="main-menu">
+        <li class="menu-item">
+          <span class="menu-trigger" tabindex="0">Books for kids 3-8 y.o.</span>
+          <ul class="submenu" aria-label="Books for kids 3 to 8 years old">
+            <li><a href="Little Red Riding Hood/Little_Red_Riding_Hood.html">Little Red Riding Hood</a></li>
+            <li><a href="Three_Little_Pigs/three_little_pigs_final.html">Three_Little_Pigs</a></li>
+            <li><a href="The Ugly Duckling/Ugly_Duck.html">The Ugly Duckling</a></li>
+          </ul>
+        </li>
+        <li class="menu-item">
+          <span class="menu-trigger" tabindex="0">Books for kids 8-15 y.o.</span>
+          <ul class="submenu" aria-label="Books for kids 8 to 15 years old">
+            <li><a href="TreasureIsland/treasure_island_first_341_live_text_updated.htm">Treasure Island</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </header>
 
+  <main>
+    <section class="intro" aria-labelledby="page-title">
+      <div class="intro-copy">
+        <h1 id="page-title">Choose a story and start reading.</h1>
+        <p>Browse illustrated stories for younger children or open a classic adventure for older readers.</p>
+        <div class="visitor-card" aria-live="polite">
+          <div><strong>Visits from this browser:</strong> <span id="visit-count">1</span></div>
+          <div><strong>Your country:</strong> <span id="visitor-country">Checking...</span></div>
+        </div>
+      </div>
+
+      <div class="book-groups" aria-label="Book groups">
+        <section class="book-group" aria-labelledby="younger-books">
+          <h2 id="younger-books">Books for kids 3-8 y.o.</h2>
+          <ul class="book-list">
+            <li><a href="Little Red Riding Hood/Little_Red_Riding_Hood.html">Little Red Riding Hood</a></li>
+            <li><a href="Three_Little_Pigs/three_little_pigs_final.html">Three_Little_Pigs</a></li>
+            <li><a href="The Ugly Duckling/Ugly_Duck.html">The Ugly Duckling</a></li>
+          </ul>
+        </section>
+
+        <section class="book-group" aria-labelledby="older-books">
+          <h2 id="older-books">Books for kids 8-15 y.o.</h2>
+          <ul class="book-list">
+            <li><a href="TreasureIsland/treasure_island_first_341_live_text_updated.htm">Treasure Island</a></li>
+          </ul>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const visitCount = document.querySelector("#visit-count");
+    const visitorCountry = document.querySelector("#visitor-country");
+    const countKey = "childrenBooksVisitCount";
+
+    const visits = Number.parseInt(localStorage.getItem(countKey) || "0", 10) + 1;
+    localStorage.setItem(countKey, String(visits));
+    visitCount.textContent = visits.toLocaleString();
+
+    fetch("https://ipwho.is/")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Country lookup failed");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        visitorCountry.textContent = data.country || data.country_code || "Unavailable";
+      })
+      .catch(() => {
+        visitorCountry.textContent = "Unavailable";
+      });
+  </script>
+</body>
 </html>
