@@ -1,12 +1,14 @@
-const { TableClient, AzureNamedKeyCredential } = require("@azure/data-tables");
+const {
+  getPublicErrorReason,
+  getTableClient,
+  jsonResponse
+} = require("../shared/storage");
 
 const tableName = "VisitorCounters";
 const totalsEntity = {
   partitionKey: "site",
   rowKey: "totals"
 };
-
-let tableClientPromise;
 
 module.exports = async function (context, req) {
   try {
@@ -18,7 +20,7 @@ module.exports = async function (context, req) {
     }
 
     const country = getCountry(req);
-    const tableClient = await getTableClient();
+    const tableClient = await getTableClient(tableName);
     const isNewVisitor = await ensureVisitor(tableClient, visitorId, country);
     const totals = await updateTotals(tableClient, isNewVisitor);
 
@@ -35,50 +37,6 @@ module.exports = async function (context, req) {
     });
   }
 };
-
-async function getTableClient() {
-  if (!tableClientPromise) {
-    tableClientPromise = createTableClient();
-  }
-
-  return tableClientPromise;
-}
-
-async function createTableClient() {
-  const connectionString =
-    process.env.VISITOR_COUNTER_STORAGE || process.env.AzureWebJobsStorage;
-
-  if (!connectionString) {
-    const error = new Error("Missing storage connection string");
-    error.publicReason = "missing-storage-setting";
-    throw error;
-  }
-
-  const accountName = getConnectionStringValue(connectionString, "AccountName");
-  const accountKey = getConnectionStringValue(connectionString, "AccountKey");
-  const tableEndpoint =
-    getConnectionStringValue(connectionString, "TableEndpoint") ||
-    `https://${accountName}.table.core.windows.net`;
-
-  if (!accountName || !accountKey) {
-    const error = new Error("Storage connection string must include AccountName and AccountKey");
-    error.publicReason = "invalid-storage-connection-string";
-    throw error;
-  }
-
-  const credential = new AzureNamedKeyCredential(accountName, accountKey);
-  const client = new TableClient(tableEndpoint, tableName, credential);
-
-  try {
-    await client.createTable();
-  } catch (error) {
-    if (error.statusCode !== 409) {
-      throw error;
-    }
-  }
-
-  return client;
-}
 
 async function ensureVisitor(tableClient, visitorId, country) {
   const entity = {
@@ -150,12 +108,6 @@ async function getTotals(tableClient) {
   return tableClient.getEntity(totalsEntity.partitionKey, totalsEntity.rowKey);
 }
 
-function getConnectionStringValue(connectionString, key) {
-  const parts = connectionString.split(";");
-  const match = parts.find((part) => part.toLowerCase().startsWith(`${key.toLowerCase()}=`));
-  return match ? match.slice(key.length + 1) : "";
-}
-
 function cleanVisitorId(visitorId) {
   if (typeof visitorId !== "string") {
     return "";
@@ -171,31 +123,4 @@ function getCountry(req) {
     req.headers["x-vercel-ip-country"] ||
     "Unavailable"
   );
-}
-
-function jsonResponse(status, body) {
-  return {
-    status,
-    headers: {
-      "Content-Type": "application/json",
-      "Cache-Control": "no-store"
-    },
-    body
-  };
-}
-
-function getPublicErrorReason(error) {
-  if (error && error.publicReason) {
-    return error.publicReason;
-  }
-
-  if (error && (error.statusCode === 401 || error.statusCode === 403)) {
-    return "storage-auth-failed";
-  }
-
-  if (error && error.statusCode) {
-    return `storage-error-${error.statusCode}`;
-  }
-
-  return "unknown";
 }
