@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://lively-smoke-0c1491a10.1.azurestaticapps.net/sitemap.xml

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://lively-smoke-0c1491a10.1.azurestaticapps.net/</loc>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://lively-smoke-0c1491a10.1.azurestaticapps.net/Little%20Red%20Riding%20Hood/Little_Red_Riding_Hood.html</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://lively-smoke-0c1491a10.1.azurestaticapps.net/Three_Little_Pigs/three_little_pigs_final.html</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://lively-smoke-0c1491a10.1.azurestaticapps.net/The%20Ugly%20Duckling/Ugly_Duck.html</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://lively-smoke-0c1491a10.1.azurestaticapps.net/TreasureIsland/treasure_island_illustrated_single_page.html</loc>
+    <priority>0.8</priority>
+  </url>
+</urlset>
