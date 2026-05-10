@@ -61,7 +61,8 @@
         gap: 8px;
         flex-wrap: wrap;
       }
-      button {
+      button,
+      .menu-link {
         appearance: none;
         border: 1px solid rgba(0, 0, 0, 0.1);
         background: var(--card);
@@ -70,6 +71,9 @@
         border-radius: 12px;
         box-shadow: var(--shadow);
         cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        text-decoration: none;
       }
       button[disabled] {
         opacity: 0.5;
@@ -156,7 +160,8 @@
         font-size: clamp(16px, 1.8vw, 18px) !important;
         line-height: 1.7 !important;
       }
-      button {
+      button,
+      .menu-link {
         padding: 8px 12px !important;
       }
       .imgwrap {
@@ -193,6 +198,7 @@
       <header class="top">
         <h1 class="title">📖 Little Red Riding Hood</h1>
         <div class="controls">
+          <a class="menu-link" href="../index.html">Main menu</a>
           <button id="themeBtn">Toggle theme</button>
           <button id="speakBtn">Read aloud</button>
           <button id="stopBtn">Stop</button>
@@ -414,16 +420,7 @@
       stopBtn.addEventListener("click", stopSpeech);
 
       render();
-      function updateVisitorCount() {
-        fetch("https://api.countapi.xyz/hit/childrenbook/lrrh")
-          .then((res) => res.json())
-          .then((data) => {
-            document.getElementById(
-              "visitorCount"
-            ).textContent = `Visitors: ${data.value}`;
-          });
-      }
-      updateVisitorCount();
     </script>
+    <script src="../assets/visitor-counter.js"></script>
   </body>
 </html>

@@ -25,6 +25,7 @@ jobs:
           rsync -av \
             --exclude='.git' \
             --exclude='.github' \
+            --exclude='api' \
             --exclude='_site' \
             --exclude='desktop.ini' \
             ./ _site/
@@ -38,7 +39,7 @@ jobs:
           ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
           app_location: "_site" # Clean static app content staged without repo metadata
-          api_location: "" # Api source code path - optional
+          api_location: "api" # Azure Function for the site-wide visitor counter
           output_location: "" # Static files are already in app_location
           skip_app_build: true
           ###### End of Repository/Build Configurations ######

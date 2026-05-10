@@ -3,7 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Free Children Books</title>
+  <title>Free Illustrated Children Books | Stories for Kids</title>
+  <meta name="description" content="Read free illustrated children books, fairy tales, stories for kids, and classic books for children including Three Little Pigs, Ugly Duckling, Little Red Riding Hood, and Treasure Island.">
+  <meta name="keywords" content="children books, books for kids, illustrated books, reading for kids, treasure island, fairy tales, three little pigs, ugly duck, stories for kids, stories for children">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Free Illustrated Children Books">
+  <meta property="og:description" content="Free illustrated books and stories for kids, from fairy tales to Treasure Island.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/book-thumbnails/treasure-island.jpg">
   <style>
     :root {
       color-scheme: light;
@@ -131,13 +138,24 @@
     }
 
     .submenu a {
-      display: block;
-      padding: 12px 14px;
+      display: grid;
+      grid-template-columns: 58px minmax(0, 1fr);
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
       border-radius: 7px;
       color: var(--ink);
       font-weight: 700;
       text-decoration: none;
       line-height: 1.25;
+    }
+
+    .menu-thumb {
+      width: 58px;
+      aspect-ratio: 4 / 3;
+      border-radius: 6px;
+      object-fit: cover;
+      box-shadow: 0 6px 14px rgba(23, 32, 51, 0.12);
     }
 
     .submenu a:hover,
@@ -215,16 +233,28 @@
     }
 
     .book-list a {
-      display: flex;
+      display: grid;
+      grid-template-columns: 74px minmax(0, 1fr) auto;
       align-items: center;
-      justify-content: space-between;
       gap: 14px;
-      min-height: 58px;
-      padding: 0 20px;
+      min-height: 86px;
+      padding: 10px 16px;
       background: var(--surface);
       color: var(--ink);
       font-weight: 800;
       text-decoration: none;
+    }
+
+    .book-thumb {
+      width: 74px;
+      aspect-ratio: 4 / 3;
+      border-radius: 7px;
+      object-fit: cover;
+      box-shadow: 0 8px 18px rgba(23, 32, 51, 0.14);
+    }
+
+    .book-title {
+      min-width: 0;
     }
 
     .book-list a::after {
@@ -298,6 +328,14 @@
         transform: none;
       }
 
+      .submenu a {
+        grid-template-columns: 52px minmax(0, 1fr);
+      }
+
+      .menu-thumb {
+        width: 52px;
+      }
+
       main {
         width: min(100% - 24px, 640px);
         padding-top: 34px;
@@ -311,26 +349,77 @@
       .book-groups {
         margin-top: 28px;
       }
+
+      .book-list a {
+        grid-template-columns: 64px minmax(0, 1fr) auto;
+        padding: 10px 12px;
+      }
+
+      .book-thumb {
+        width: 64px;
+      }
     }
   </style>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Free Illustrated Children Books",
+      "description": "Free illustrated children books, fairy tales, stories for kids, reading for kids, and classic illustrated books for children.",
+      "keywords": "children books, books for kids, illustrated books, reading for kids, treasure island, fairy tales, three little pigs, ugly duck, stories for kids, stories for children"
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "Illustrated books and stories for kids",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Little Red Riding Hood",
+          "url": "Little Red Riding Hood/Little_Red_Riding_Hood.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "The Three Little Pigs",
+          "url": "Three_Little_Pigs/three_little_pigs_final.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "The Ugly Duckling",
+          "url": "The Ugly Duckling/Ugly_Duck.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Treasure Island",
+          "url": "TreasureIsland/treasure_island_illustrated_single_page.html"
+        }
+      ]
+    }
+  </script>
 </head>
 <body>
   <header class="site-header">
     <nav class="nav-wrap" aria-label="Main menu">
-      <a class="brand" href="index.html">Free Children Books</a>
+      <a class="brand" href="index.html">Free Illustrated Children Books</a>
       <ul class="main-menu">
         <li class="menu-item">
           <span class="menu-trigger" tabindex="0">Books for kids 3-8 y.o.</span>
           <ul class="submenu" aria-label="Books for kids 3 to 8 years old">
-            <li><a href="Little Red Riding Hood/Little_Red_Riding_Hood.html">Little Red Riding Hood</a></li>
-            <li><a href="Three_Little_Pigs/three_little_pigs_final.html">Three_Little_Pigs</a></li>
-            <li><a href="The Ugly Duckling/Ugly_Duck.html">The Ugly Duckling</a></li>
+            <li><a href="Little Red Riding Hood/Little_Red_Riding_Hood.html"><img class="menu-thumb" src="assets/book-thumbnails/little-red-riding-hood.jpg" alt="">Little Red Riding Hood</a></li>
+            <li><a href="Three_Little_Pigs/three_little_pigs_final.html"><img class="menu-thumb" src="assets/book-thumbnails/three-little-pigs.jpg" alt="">The Three Little Pigs</a></li>
+            <li><a href="The Ugly Duckling/Ugly_Duck.html"><img class="menu-thumb" src="assets/book-thumbnails/ugly-duckling.jpg" alt="">The Ugly Duckling</a></li>
           </ul>
         </li>
         <li class="menu-item">
           <span class="menu-trigger" tabindex="0">Books for kids 8-15 y.o.</span>
           <ul class="submenu" aria-label="Books for kids 8 to 15 years old">
-            <li><a href="TreasureIsland/treasure_island_illustrated_single_page.html">Treasure Island</a></li>
+            <li><a href="TreasureIsland/treasure_island_illustrated_single_page.html"><img class="menu-thumb" src="assets/book-thumbnails/treasure-island.jpg" alt="">Treasure Island</a></li>
           </ul>
         </li>
       </ul>
@@ -340,10 +429,11 @@
   <main>
     <section class="intro" aria-labelledby="page-title">
       <div class="intro-copy">
-        <h1 id="page-title">Choose a story and start reading.</h1>
-        <p>Browse illustrated stories for younger children or open a classic adventure for older readers.</p>
+        <h1 id="page-title">Free illustrated children books and stories for kids.</h1>
+        <p>Browse free illustrated children books, fairy tales, stories for kids, reading for kids, and classic books for children.</p>
         <div class="visitor-card" aria-live="polite">
-          <div><strong>Visits from this browser:</strong> <span id="visit-count">1</span></div>
+          <div><strong>Total site visits:</strong> <span id="visit-count">Counting...</span></div>
+          <div><strong>Unique browsers:</strong> <span id="unique-count">Counting...</span></div>
           <div><strong>Your country:</strong> <span id="visitor-country">Checking...</span></div>
         </div>
       </div>
@@ -352,44 +442,22 @@
         <section class="book-group" aria-labelledby="younger-books">
           <h2 id="younger-books">Books for kids 3-8 y.o.</h2>
           <ul class="book-list">
-            <li><a href="Little Red Riding Hood/Little_Red_Riding_Hood.html">Little Red Riding Hood</a></li>
-            <li><a href="Three_Little_Pigs/three_little_pigs_final.html">Three_Little_Pigs</a></li>
-            <li><a href="The Ugly Duckling/Ugly_Duck.html">The Ugly Duckling</a></li>
+            <li><a href="Little Red Riding Hood/Little_Red_Riding_Hood.html"><img class="book-thumb" src="assets/book-thumbnails/little-red-riding-hood.jpg" alt="Little Red Riding Hood illustration"><span class="book-title">Little Red Riding Hood</span></a></li>
+            <li><a href="Three_Little_Pigs/three_little_pigs_final.html"><img class="book-thumb" src="assets/book-thumbnails/three-little-pigs.jpg" alt="The Three Little Pigs illustration"><span class="book-title">The Three Little Pigs</span></a></li>
+            <li><a href="The Ugly Duckling/Ugly_Duck.html"><img class="book-thumb" src="assets/book-thumbnails/ugly-duckling.jpg" alt="The Ugly Duckling illustration"><span class="book-title">The Ugly Duckling</span></a></li>
           </ul>
         </section>
 
         <section class="book-group" aria-labelledby="older-books">
           <h2 id="older-books">Books for kids 8-15 y.o.</h2>
           <ul class="book-list">
-            <li><a href="TreasureIsland/treasure_island_illustrated_single_page.html">Treasure Island</a></li>
+            <li><a href="TreasureIsland/treasure_island_illustrated_single_page.html"><img class="book-thumb" src="assets/book-thumbnails/treasure-island.jpg" alt="Treasure Island illustration"><span class="book-title">Treasure Island</span></a></li>
           </ul>
         </section>
       </div>
     </section>
   </main>
 
-  <script>
-    const visitCount = document.querySelector("#visit-count");
-    const visitorCountry = document.querySelector("#visitor-country");
-    const countKey = "childrenBooksVisitCount";
-
-    const visits = Number.parseInt(localStorage.getItem(countKey) || "0", 10) + 1;
-    localStorage.setItem(countKey, String(visits));
-    visitCount.textContent = visits.toLocaleString();
-
-    fetch("https://ipwho.is/")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Country lookup failed");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        visitorCountry.textContent = data.country || data.country_code || "Unavailable";
-      })
-      .catch(() => {
-        visitorCountry.textContent = "Unavailable";
-      });
-  </script>
+  <script src="assets/visitor-counter.js"></script>
 </body>
 </html>

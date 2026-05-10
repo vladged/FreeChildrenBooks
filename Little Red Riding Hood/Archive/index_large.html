@@ -22,7 +22,7 @@
     header.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
     h1.title{font-family:'Quicksand',system-ui,sans-serif;font-weight:800;letter-spacing:.2px;margin:0;font-size:clamp(22px,2.4vw,32px)}
     .controls{display:flex;gap:8px;flex-wrap:wrap}
-    button{appearance:none;border:1px solid rgba(0,0,0,.1);background:var(--card);color:var(--fg);padding:10px 14px;border-radius:12px;box-shadow:var(--shadow);cursor:pointer}
+    button,.menu-link{appearance:none;border:1px solid rgba(0,0,0,.1);background:var(--card);color:var(--fg);padding:10px 14px;border-radius:12px;box-shadow:var(--shadow);cursor:pointer;display:inline-flex;align-items:center;text-decoration:none}
     button[disabled]{opacity:.5;cursor:not-allowed}
     .card{background:var(--card);padding:28px;border-radius:18px;box-shadow:var(--shadow)}
     h2.page{font-family:'Quicksand',system-ui,sans-serif;margin:0 0 8px 0;font-size:clamp(20px,2.2vw,28px)}
@@ -40,6 +40,7 @@
     <header class="top">
       <h1 class="title">📖 Little Red Riding Hood</h1>
       <div class="controls">
+        <a class="menu-link" href="../../index.html">Main menu</a>
         <button id="themeBtn">Toggle theme</button>
         <button id="speakBtn">Read aloud</button>
         <button id="stopBtn">Stop</button>
@@ -128,22 +129,7 @@
   stopBtn.addEventListener('click', stopSpeech);
 
   render();
-  
-  // ...existing code...
-
-      // Visitor count using countapi.xyz
-      function updateVisitorCount() {
-        fetch('https://api.countapi.xyz/hit/childrenbook/lrrh')
-          .then(res => res.json())
-          .then(data => {
-            document.getElementById('visitorCount').textContent =
-              `Visitors: ${data.value}`;
-          });
-  }
-      updateVisitorCount();
-
-    // ...existing code...
-  </script>
 </script>
+<script src="../../assets/visitor-counter.js"></script>
 </body>
 </html>
