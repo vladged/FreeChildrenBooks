@@ -30,7 +30,8 @@ module.exports = async function (context, req) {
   } catch (error) {
     context.log.error(error);
     context.res = jsonResponse(503, {
-      error: "Visit counter is not configured"
+      error: "Visit counter is unavailable",
+      reason: getPublicErrorReason(error)
     });
   }
 };
@@ -48,7 +49,9 @@ async function createTableClient() {
     process.env.VISITOR_COUNTER_STORAGE || process.env.AzureWebJobsStorage;
 
   if (!connectionString) {
-    throw new Error("Missing VISITOR_COUNTER_STORAGE or AzureWebJobsStorage");
+    const error = new Error("Missing storage connection string");
+    error.publicReason = "missing-storage-setting";
+    throw error;
   }
 
   const accountName = getConnectionStringValue(connectionString, "AccountName");
@@ -58,7 +61,9 @@ async function createTableClient() {
     `https://${accountName}.table.core.windows.net`;
 
   if (!accountName || !accountKey) {
-    throw new Error("Storage connection string must include AccountName and AccountKey");
+    const error = new Error("Storage connection string must include AccountName and AccountKey");
+    error.publicReason = "invalid-storage-connection-string";
+    throw error;
   }
 
   const credential = new AzureNamedKeyCredential(accountName, accountKey);
@@ -177,4 +182,20 @@ function jsonResponse(status, body) {
     },
     body
   };
+}
+
+function getPublicErrorReason(error) {
+  if (error && error.publicReason) {
+    return error.publicReason;
+  }
+
+  if (error && (error.statusCode === 401 || error.statusCode === 403)) {
+    return "storage-auth-failed";
+  }
+
+  if (error && error.statusCode) {
+    return `storage-error-${error.statusCode}`;
+  }
+
+  return "unknown";
 }
